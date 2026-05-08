@@ -84,8 +84,8 @@ O fluxo de dados segue o padrão: **carregar arquivos → operações em memóri
 
 ---
 
-## Autor
+## Autores
 
-**John Miguel da Silva Fernandes**  
+**John Miguel da Silva Fernandes, Enzo Andrade dos Anjos e Luis Eduardo Bezerra Gois**  
 Estudante de Engenharia de Software — UFC, Campus Russas  
 [github.com/StJ0hn](https://github.com/StJ0hn) · [linkedin.com/in/john-fernandesdev](https://linkedin.com/in/john-fernandesdev)
