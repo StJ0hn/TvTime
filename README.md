@@ -1,61 +1,91 @@
-# Tv-Time
-EN: Application for managing preferences about movies.
+# TV Time
 
-PT-BR: Aplicação para gerenciamento de preferências sobre filmes.
+Aplicação de terminal para gerenciamento de preferências sobre filmes, desenvolvida em C como parte de um seminário da disciplina de **Laboratório de Programação** na Universidade Federal do Ceará (UFC).
 
-## Estrutura do Código
-### Estrutura do main.c
-🔹 1. Estrutura de Dados
-📌 Usuários:
-Nome
-Senha (PIN de 8 dígitos, numérica)
-Indicador de administrador (1 para admin, 0 para usuário comum)
-📌 Filmes:
-Nome
-Duração
-Gênero
-Ano de lançamento
-📌 Filmes assistidos:
-Nome do filme
-Onde assistiu
-Data de visualização
+---
 
-🔹 2. Fluxo do Programa
-📌 Cadastro e Login
+## Sobre o Projeto
 
-✅ Sem mudanças, apenas considerar possíveis dados extras no cadastro.
+O TV Time é um sistema multiusuário com dois perfis distintos: **administrador** e **usuário comum**. O admin cadastra filmes no catálogo; os usuários registram o que assistiram, em qual plataforma e quando — e podem visualizar estatísticas do seu histórico.
 
-📌 Cadastro de Filmes (Somente para Admins)
+Todos os dados são persistidos em arquivos `.txt`, mantendo o estado entre execuções.
 
-1️⃣ Pedir nome, duração, gênero e ano de lançamento.
+---
 
-2️⃣ Adicionar o filme ao arquivo de filmes.
+## Funcionalidades
 
-📌 Registrar Filme Assistido
+### Administrador (primeiro usuário cadastrado)
+- Cadastrar filmes com nome, duração, gênero e ano
 
-1️⃣ O usuário escolhe um filme da lista.
+### Usuário Comum
+- Registrar filmes assistidos (com plataforma e data)
+- Listar histórico pessoal de filmes assistidos
+- Ver estatísticas: total de filmes e tempo total assistido
 
-2️⃣ Ele informa onde assistiu e a data.
+### Geral
+- Cadastro e login com senhas criptografadas
+- Validação de dados de entrada (datas, duração, ano)
+- Persistência automática em arquivos
 
-3️⃣ O filme é salvo na lista de assistidos.
+---
 
-📌 Listar Meus Filmes Assistidos
+## Tecnologias
 
-1️⃣ O usuário pode ver todos os filmes que assistiu, com data e onde assistiu.
+- **Linguagem:** C (C99)
+- **Compilador:** GCC
+- **Persistência:** Arquivos de texto (`.txt`)
+- **Bibliotecas:** `stdio.h`, `string.h`, `stdlib.h`, `time.h`, `ctype.h`, `stdbool.h`
 
-📌 Estatísticas
+---
 
-1️⃣ O programa exibe o tempo total assistido pelo usuário.
+## Como Executar
 
-3️⃣ Novas Funções Necessárias
+### Pré-requisitos
+- GCC instalado (`gcc --version`)
 
-✅ cadastrarFilme() → Permite que o admin cadastre um filme.
+### Compilar e rodar
 
-✅ listarFilmes() → Mostra os filmes cadastrados.
+```bash
+gcc -o tvtime main.c
+./tvtime
+```
 
-✅ registrarFilmeAssistido() → Permite que um usuário registre um filme assistido.
+---
 
-✅ listarFilmesAssistidos() → Exibe os filmes assistidos.
+## Estrutura dos Arquivos
 
-✅ calcularEstatisticas() → Calcula o tempo total de filmes assistidos.
+```
+tv-time/
+├── main.c              # Código-fonte principal
+├── usuarios.txt        # Gerado automaticamente — dados dos usuários
+├── filmes.txt          # Gerado automaticamente — catálogo de filmes
+└── assistidos.txt      # Gerado automaticamente — histórico de visualizações
+```
 
+---
+
+## Segurança de Senhas
+
+As senhas não são armazenadas em texto puro. Ao cadastrar, cada caractere passa por uma transformação (shift + conversão para maiúsculas) antes de ser salvo no arquivo `usuarios.txt`.
+
+---
+
+## Arquitetura
+
+O projeto utiliza três `structs` principais:
+
+| Struct | Responsabilidade |
+|---|---|
+| `usuario_comum` | Armazena login, senha, nome e tipo (admin/comum) |
+| `filme` | Armazena nome, duração (em minutos), gênero e ano |
+| `filmes_assistidos` | Liga um usuário a um filme, com plataforma e data |
+
+O fluxo de dados segue o padrão: **carregar arquivos → operações em memória → salvar arquivos** a cada modificação.
+
+---
+
+## Autor
+
+**John Miguel da Silva Fernandes**  
+Estudante de Engenharia de Software — UFC, Campus Russas  
+[github.com/StJ0hn](https://github.com/StJ0hn) · [linkedin.com/in/john-fernandesdev](https://linkedin.com/in/john-fernandesdev)
